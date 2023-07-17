@@ -1,11 +1,26 @@
-import './App.css';
-import Nav from "./components/Nav"
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Nav from './components/Nav';
+
+import { useTheme } from '@mui/material/styles';
+import ModeToggleButton from './components/themes/ModeToggleButton';
+
+
 
 function App() {
+  const theme = useTheme();
+
   return (
-    <div>
+    <Box
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        bgcolor: theme.palette.background.default,
+        color: theme.palette.text.primary,
+      }}
+    >
       <Nav/>
-      </div>
+    </Box>
   );
 }
 

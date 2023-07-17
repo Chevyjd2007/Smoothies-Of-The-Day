@@ -1,19 +1,27 @@
 import React from 'react';
 import "./nav.css"
 import { MdAddBox } from "react-icons/md";
-import { Tooltip, IconButton, Box } from "@mui/material";
+import { Tooltip, Box, IconButton } from "@mui/material";
+import Button from '@mui/material/Button';
+import ModeToggleButton from './themes/ModeToggleButton';
+import { useTheme } from '@mui/material/styles';
 
 export default function Nav() {
+  const theme = useTheme();
+
   return (     
-    <div className='NavbarItems'>
+    <Box className='NavbarItems' style={{ backgroundColor: theme.palette.background.default }}>
+      <Box position={'absolute'} top={'5'} left={'50px'}>
        <Tooltip title="Add recipe">
-          <IconButton edge="start" className='iconButton'>
-        <MdAddBox size={"50px"} color='#4dd0e1'/>
+          <IconButton>
+            <MdAddBox size={"45px"} color='#64ce56'/>
           </IconButton>
         </Tooltip>
-      <a className='bar__link' href='/' data-text="Smoothie-of-the-day">
+        </Box>
+      <a className='bar__link' style={{ color:  theme.palette.text.primary}} data-text="Smoothie-of-the-day">
         Smoothie-of-the-day
        </a>
-    </div>
+            <ModeToggleButton/>
+    </Box>
   );
 }
