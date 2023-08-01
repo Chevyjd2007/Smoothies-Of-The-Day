@@ -17,18 +17,20 @@ public class Recipe {
     @Column(name = "cook_time")
     private Integer cookTime;
     private Integer servings;
-    @Column(name = "nutrition_profile")
-    private String nutritionProfile;
+
+    @ElementCollection
+    private List<String> nutritionProfile = new ArrayList<>();
 
     // one to many relationship with ingredients, steps and one to one with nutrition facts
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private List<Ingredients> ingredients = new ArrayList<>();
+    @ElementCollection
+    private List<String> ingredients;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private List<Step> steps = new ArrayList<>();
+    private String steps;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nutrition_fact_id", referencedColumnName = "id")
     private NutritionFact nutritionFact;
+
 
     public Long getId() {
         return id;
@@ -70,27 +72,27 @@ public class Recipe {
         this.servings = servings;
     }
 
-    public String getNutritionProfile() {
+    public List<String> getNutritionProfile() {
         return nutritionProfile;
     }
 
-    public void setNutritionProfile(String nutritionProfile) {
+    public void setNutritionProfile(List<String> nutritionProfile) {
         this.nutritionProfile = nutritionProfile;
     }
 
-    public List<Ingredients> getIngredients() {
+    public List<String> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredients> ingredients) {
+    public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public List<Step> getSteps() {
+    public String getSteps() {
         return steps;
     }
 
-    public void setSteps(List<Step> steps) {
+    public void setSteps(String steps) {
         this.steps = steps;
     }
 

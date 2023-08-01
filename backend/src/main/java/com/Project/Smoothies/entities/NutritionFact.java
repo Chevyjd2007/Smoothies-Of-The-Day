@@ -11,7 +11,7 @@ public class NutritionFact {
     private long id;
 
     // Only one nutrition fact entry per recipe
-    @OneToOne
+    @OneToOne(mappedBy = "nutritionFact")
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
 
