@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Nav from './components/Nav';
+import HomePage from "./components/HomePage"
 
 import { useTheme } from '@mui/material/styles';
-import ModeToggleButton from './components/themes/ModeToggleButton';
 
 
 
@@ -20,6 +20,7 @@ function App() {
       }}
     >
       <Nav/>
+      <HomePage/>
     </Box>
   );
 }

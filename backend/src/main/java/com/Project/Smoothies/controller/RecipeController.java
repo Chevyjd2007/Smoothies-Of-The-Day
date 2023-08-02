@@ -3,8 +3,11 @@ package com.Project.Smoothies.controller;
 
 import com.Project.Smoothies.entities.NutritionFact;
 import com.Project.Smoothies.entities.Recipe;
-import com.Project.Smoothies.entities.RecipeDto;
+import com.Project.Smoothies.dto.RecipeDto;
+import com.Project.Smoothies.repositories.RecipeRepo;
 import com.Project.Smoothies.service.RecipeService;
+import org.checkerframework.checker.units.qual.A;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,50 +22,52 @@ import java.util.Optional;
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final ModelMapper modelMapper;
+    private final RecipeRepo recipeRepo;
 
     @Autowired
-    public RecipeController(RecipeService recipeService){
+    public RecipeController(RecipeService recipeService, ModelMapper modelMapper, RecipeRepo recipeRepo){
         this.recipeService = recipeService;
+        this.modelMapper = modelMapper;
+        this.recipeRepo = recipeRepo;
     }
 
+    // Controller method to add a new recipe into the database
     @PostMapping
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Recipe> createRecipe(@RequestBody RecipeDto recipeDto) {
-        Recipe recipe = new Recipe();
-        // assuming these setters based on your form fields
-        recipe.setTitle(recipeDto.getTitle());
-        recipe.setDescription(recipeDto.getDescription());
-        recipe.setCookTime(recipeDto.getCookTime());
-        recipe.setServings(recipeDto.getServings());
+    public RecipeDto saveRecipe(@RequestBody RecipeDto recipeDto) {
+        // Map recipe DTO to recipe entity
+        // Maps all corresponding fields from the recipeDto to the recipeEntity i.e. title, descriptiopn, cooktime, servings
+        Recipe recipeEntity = modelMapper.map(recipeDto, Recipe.class);
 
-        NutritionFact nutritionFact = new NutritionFact();
-        nutritionFact.setCalories(recipeDto.getCalories());
-        nutritionFact.setCarbs(recipeDto.getCarbs());
-        nutritionFact.setFat(recipeDto.getFat());
-        nutritionFact.setProtein(recipeDto.getProtein());
-        nutritionFact.setTotalSugars(recipeDto.getTotalSugars());
+        // Map NutrtionFactDto to NutrtitionFact entity
+        NutritionFact nutritionFactEntity = modelMapper.map(recipeDto.getNutritionFact(), NutritionFact.class);
+        recipeEntity.setNutritionFact(nutritionFactEntity);
 
-        recipe.setNutritionFact(nutritionFact);
-
-        // assuming you get ingredients as a list of strings
-        List<String> ingredientsList = new ArrayList<>();
-        for(String ingredient: recipeDto.getIngredients()){
-            Ingredients ingredientObj = new Ingredients();
-            ingredientObj.setIngredient(ingredient);
-            ingredientsList.add(ingredientObj);
+        // Handle the ingredients
+        List<String> ingredientList = new ArrayList<>();
+        for (String ingredient: recipeDto.getIngredients()) {
+            String ingredientItem = ingredient;
+            ingredientList.add(ingredientItem);
         }
-        recipe.setIngredients(ingredientsList);
+        recipeEntity.setIngredients(ingredientList);
 
-        // assuming you get nutrition profiles as a list of strings
-        List<NutritionProfile> nutritionProfileList = new ArrayList<>();
-        for(String profile: recipeDto.getNutritionProfile()){
-            NutritionProfile profileObj = new NutritionProfile();
-            profileObj.setProfile(profile);
-            nutritionProfileList.add(profileObj);
+        // Handle the nutrition profile
+        List<String> nutritionProfileList = new ArrayList<>();
+        for (String nutritionProfile: recipeDto.getNutritionProfile()){
+            String nutritionItem =  nutritionProfile;
+            nutritionProfileList.add(nutritionItem);
         }
-        recipe.setNutritionProfile(nutritionProfileList);
+        recipeEntity.setNutritionProfile(nutritionProfileList);
 
-        return new ResponseEntity<>(recipeService.saveOrUpdateRecipe(recipe), HttpStatus.CREATED);
+        // save the recipe
+        Recipe savedRecipe = recipeRepo.save(recipeEntity);
+
+        // Map the saved entity back to a DTO
+        RecipeDto savedDto = modelMapper.map(savedRecipe, RecipeDto.class);
+
+        return savedDto;
+
     }
 
     // API to get the specified recipe

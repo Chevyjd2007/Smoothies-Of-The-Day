@@ -1,4 +1,6 @@
-package com.Project.Smoothies.entities;
+package com.Project.Smoothies.dto;
+
+
 
 import java.util.List;
 
@@ -7,11 +9,8 @@ public class RecipeDto {
     private String description;
     private Integer cookTime;
     private Integer servings;
-    private Integer calories;
-    private Integer carbs;
-    private Integer fat;
-    private Integer protein;
-    private Integer totalSugars;
+    private String steps;
+    private NutritionFactDto nutritionFact;
     private List<String> ingredients;
     private List<String> nutritionProfile;
 
@@ -47,44 +46,12 @@ public class RecipeDto {
         this.servings = servings;
     }
 
-    public Integer getCalories() {
-        return calories;
+    public NutritionFactDto getNutritionFact() {
+        return nutritionFact;
     }
 
-    public void setCalories(Integer calories) {
-        this.calories = calories;
-    }
-
-    public Integer getCarbs() {
-        return carbs;
-    }
-
-    public void setCarbs(Integer carbs) {
-        this.carbs = carbs;
-    }
-
-    public Integer getFat() {
-        return fat;
-    }
-
-    public void setFat(Integer fat) {
-        this.fat = fat;
-    }
-
-    public Integer getProtein() {
-        return protein;
-    }
-
-    public void setProtein(Integer protein) {
-        this.protein = protein;
-    }
-
-    public Integer getTotalSugars() {
-        return totalSugars;
-    }
-
-    public void setTotalSugars(Integer totalSugars) {
-        this.totalSugars = totalSugars;
+    public void setNutritionFact(NutritionFactDto nutritionFact) {
+        this.nutritionFact = nutritionFact;
     }
 
     public List<String> getIngredients() {
@@ -101,5 +68,13 @@ public class RecipeDto {
 
     public void setNutritionProfile(List<String> nutritionProfile) {
         this.nutritionProfile = nutritionProfile;
+    }
+
+    public String getSteps() {
+        return steps;
+    }
+
+    public void setSteps(String steps) {
+        this.steps = steps;
     }
 }

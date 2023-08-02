@@ -220,8 +220,8 @@ export default function AddDialog() {
       <TextField
             autoFocus
             margin="dense"
-            id="directions"
-            label="directions"
+            id="steps"
+            label="steps"
             sx={{ m: 1, width: 400 }}
             type="text"
             multiline
