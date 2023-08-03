@@ -28,7 +28,7 @@ const MenuProps = {
   },
 };
 
-export default function AddDialog() {
+export default function AddRecipe() {
 
   const [open, setOpen] = React.useState(false);
 

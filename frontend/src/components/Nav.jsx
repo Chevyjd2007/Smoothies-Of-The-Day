@@ -1,11 +1,9 @@
 import React from 'react';
 import "./nav.css"
-import { MdAddBox } from "react-icons/md";
-import { Tooltip, Box, IconButton } from "@mui/material";
-import Button from '@mui/material/Button';
+import { Box} from "@mui/material";
 import ModeToggleButton from './themes/ModeToggleButton';
 import { useTheme } from '@mui/material/styles';
-import AddDialog from './AddDialog';
+import AddRecipe from './AddRecipe';
 
 
 export default function Nav() {
@@ -14,7 +12,7 @@ export default function Nav() {
   return (     
     <Box className='NavbarItems' style={{ backgroundColor: theme.palette.background.default }}>
       <Box position={'absolute'} top={'5'} left={'50px'}>
-       <AddDialog/>
+       <AddRecipe/>
         </Box>
       <a className='bar__link' style={{ color:  theme.palette.text.primary}} data-text="Smoothie-of-the-day">
         Smoothie-of-the-day
