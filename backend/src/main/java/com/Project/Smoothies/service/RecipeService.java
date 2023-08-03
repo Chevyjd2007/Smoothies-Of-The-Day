@@ -39,4 +39,9 @@ public class RecipeService {
     public void deleteRecipe(Long id) {
         recipeRepo.deleteById(id);
     }
+
+    // Get total number of recipes
+    public long recipesTotal() {
+        return recipeRepo.count();
+    }
 }

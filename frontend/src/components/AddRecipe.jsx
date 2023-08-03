@@ -16,7 +16,7 @@ import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-// Dropdown menu for nutrion profiles
+// Dropdown menu for nutrion profiles from MUI
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -76,7 +76,9 @@ export default function AddRecipe() {
 
   // List of nutritional profiles the user can choice from
   const profiles = [
-  'Heart Healthy', 'Low Calorie', 'Low Fat', "Low Sodium", "Rich in Protein", "Healthy Immunity"
+  'Heart Healthy', 'Low-Calorie', 'Low Fat', "Low Sodium", "High-Protein"
+   ,"Healthy Immunity", "Gluten-Free", "High Blood Pressure", "Egg Free", "Nut-Free", "Soy-Free", "Vegetarian",
+   "Anti-Inflammatory", "Vegan", "Bone Health", " High Calcium", "Dairy-Free"
   ];
 
   const handleChange = (event) => {

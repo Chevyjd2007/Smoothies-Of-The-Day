@@ -1,6 +1,7 @@
 package com.Project.Smoothies.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class NutritionFact {
     // Only one nutrition fact entry per recipe
     @OneToOne(mappedBy = "nutritionFact")
     @JoinColumn(name = "recipe_id", nullable = false)
+    @JsonIgnore
     private Recipe recipe;
 
     private Integer calories;

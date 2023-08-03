@@ -32,7 +32,7 @@ public class RecipeController {
         this.recipeRepo = recipeRepo;
     }
 
-    // Controller method to add a new recipe into the database
+    // Controller method to add a new recipe into the database from the static web component
     @PostMapping
     @CrossOrigin(origins = "http://localhost:3000")
     public RecipeDto saveRecipe(@RequestBody RecipeDto recipeDto) {
@@ -81,6 +81,10 @@ public class RecipeController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
+    }
+    @GetMapping("/totalnumber")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public long getRecipeTotal() {
+        return recipeService.recipesTotal();
     }
 }
