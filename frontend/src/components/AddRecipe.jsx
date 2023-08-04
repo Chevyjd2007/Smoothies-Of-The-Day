@@ -55,7 +55,7 @@ export default function AddRecipe() {
     // Creating a new recipe object to be sent after submission
     const recipe = {title, description, cookTime, servings, nutritionProfile, ingredients, steps, nutritionFact};
     console.log("Submitting: ", recipe);
-    axios.post('http://localhost:8080/api/recipes', recipe)
+    axios.post('/api/recipes', recipe)
     .then(response => {console.log(response)
         })
         .catch(error => console.error(error));

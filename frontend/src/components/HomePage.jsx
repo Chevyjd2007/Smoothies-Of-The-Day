@@ -21,7 +21,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const totalResponse = await axios.get("http://localhost:8080/api/recipes/totalnumber")
+            const totalResponse = await axios.get("/api/recipes/totalnumber")
             setTotal(totalResponse.data);
 
           } catch (error) {
@@ -38,7 +38,7 @@ const HomePage = () => {
  
             const fetchData = async () => {
                 try {
-                    const recipeResponse = await axios.get('http://localhost:8080/api/recipes/recipe-of-the-day')
+                    const recipeResponse = await axios.get('/api/recipes/recipe-of-the-day')
                     setRecipe(recipeResponse.data);
                 } catch (error) {
                     console.error("Error fetching recipe ", error);
