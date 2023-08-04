@@ -14,6 +14,8 @@ public class Recipe {
     private Long id;
 
     private String title;
+
+    @Column(length = 1000)
     private String description;
     @Column(name = "cook_time")
     private Integer cookTime;
@@ -22,7 +24,6 @@ public class Recipe {
     @ElementCollection
     private List<String> nutritionProfile = new ArrayList<>();
 
-    // one to many relationship with ingredients, steps and one to one with nutrition facts
     @ElementCollection
     private List<String> ingredients;
 

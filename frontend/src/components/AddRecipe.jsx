@@ -34,7 +34,7 @@ export default function AddRecipe() {
 
   // Initial state for each of the form fields
   const [title, setTitle] = React.useState("");
-  const [description, setDescription] = React.useState("");
+  const [description, setDescription] = React.useState(0);
   const [cookTime, setCookTime] = React.useState("");
   const [servings, setServings] = React.useState("");
   const [nutritionProfile, setNutritionProfile] = React.useState([]);

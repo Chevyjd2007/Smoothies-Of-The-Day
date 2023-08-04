@@ -1,37 +1,31 @@
 import React, { useEffect, useState} from 'react'
-import {Box, Typography, Paper, Skeleton, List, ListItem, Grid} from '@mui/material';
+import {Box, Typography, Paper, Skeleton, List, ListItem, Tooltip, IconButton} from '@mui/material';
 import axios from 'axios';
 import { PiDotOutlineFill } from "react-icons/pi";
+import { IoIosInformationCircle } from "react-icons/io";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContentText from '@mui/material/DialogContentText';
+
 
 const HomePage = () => {
     // Initial states 
     const [pic, setPic] = useState(null);
     const [recipe, setRecipe] = useState(null);
     const [total, setTotal] = useState(null);
+    const [open, setOpen] = React.useState(false);
 
-    // Fetches picture image based on the title of the recipe as well as the recipe object and the total number of recipes from the database.
+    // Fetches the recipe object and the total number of recipes from the database.
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const recipeResponse = await axios.get('http://localhost:8080/api/recipes/5')
             const totalResponse = await axios.get("http://localhost:8080/api/recipes/totalnumber")
-            setRecipe(recipeResponse.data);
             setTotal(totalResponse.data);
 
-            
-        const response = await axios.get(`https://api.unsplash.com/search/photos?query=$smoothie`, {
-            headers: {
-              Authorization: 'o4jd0Qrpke9s01MfRmaddcmgqv86QMfeR0wo2EzyJnI'
-            }
-          });
-    
-            if (response.data.results.length > 0) {
-              setPic(response.data.results[1].urls.small); 
-            } else {
-              console.log('No images found :(');
-            }
           } catch (error) {
-            console.error('Error fetching image', error);
+            console.error('Error fetching recipe total number ', error);
           }
         };
     
@@ -39,11 +33,72 @@ const HomePage = () => {
       }, []);
 
 
+      // Fetches the recipe object to populate the recipe of the day homepage from the database
+      useEffect(() => {
+ 
+            const fetchData = async () => {
+                try {
+                    const recipeResponse = await axios.get('http://localhost:8080/api/recipes/recipe-of-the-day')
+                    setRecipe(recipeResponse.data);
+                } catch (error) {
+                    console.error("Error fetching recipe ", error);
+                }
+            };
+            fetchData();
+        }, []);
+
+      // Fetches picture image from unsplash API if the recipe is not null based on the title of the recipe
+      useEffect(() => {
+        // Fetch image only when recipe is not null.
+        if (recipe) {
+          const fetchData = async () => {
+            try {
+              const response = await axios.get("https://api.unsplash.com/search/photos", {
+                  params: {
+                      query: `${recipe.title} drink`,
+                      per_page: 2,
+                  },
+                  headers: {
+                      Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_KEY}`
+                  }
+              });
+      
+              if (response.data.results.length > 0) {
+                setPic(response.data.results[1].urls.small);
+              } else {
+                console.log('No images found :(');
+              }
+            } catch (error) {
+              console.error('Error fetching image', error);
+            }
+          };
+      
+          fetchData();
+        }
+      }, [recipe]); // Recipe is a dependency here
+
+    // Opens dialog
+  const handleOpen = () => {
+    setOpen(true);
+  }
+
+       // Closes dialog
+  const handleClose = () => {
+    setOpen(false);
+  };
+      
+
+
   return (
     <Box  mt="20px" >
         <Box display="flex" justifyContent={'center'} alignItems={'center'} flexDirection={'column'} height={"100vh"}>
             <Box mb="30px"  mt={"5px"} flexDirection={"row"} alignContent={"center"} alignItems={"center"} display={'flex'}>
-                <Typography noWrap variant="h2" fontWeight="bold" sx={{ m: "0 0 5px 0", textAlign: 'center', color: '#e892c6'}} >{recipe ? recipe.title : <Skeleton />}</Typography>
+                <Tooltip title="Description">
+                    <IconButton onClick={handleOpen}>
+                        <IoIosInformationCircle color='#8f8c8c' size='50' />
+                    </IconButton>
+                </Tooltip>
+                <Typography noWrap variant="h2" fontWeight="bold" sx={{ m: "0 0 5px 15px", textAlign: 'center', color: '#e892c6'}} >{recipe ? recipe.title : <Skeleton />}</Typography>
                 <PiDotOutlineFill size={50} color='#929fe8'/>
                 <Typography sx={{ m: "0 0 5px 0", color: '#a8a8a8'}} variant='h4' fontWeight="bold" noWrap>{total} total recipes</Typography>
             </Box>
@@ -112,21 +167,25 @@ const HomePage = () => {
                     </Box>
                     <Box display={'flex'} justifyContent={'space-between'}>
                         <Box sx={{m:3 , mr: 2, ml: 2, display: 'flex'}}>
-                            <Box sx={{m:3 , mr: 2, ml: 4, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <Box sx={{m:3 , mr: 2, ml: 2, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                 <Typography variant='h5' fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.calories : <Skeleton />}</Typography>
-                                <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>Calories</Typography>
+                                <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>calories</Typography>
                             </Box>
-                            <Box sx={{m:3 , mr: 2, ml: 10, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <Box sx={{m:3 , mr: 2, ml: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                 <Typography variant='h5' fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.fat : <Skeleton />}g</Typography>
-                                <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>Fat</Typography>
+                                <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>fat</Typography>
                             </Box>
-                            <Box sx={{m:3 , mr: 2, ml: 10, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <Box sx={{m:3 , mr: 2, ml: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                 <Typography variant='h5' fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.carbs : <Skeleton />}g</Typography>
-                                <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>Carbs</Typography>
+                                <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>carbs</Typography>
                             </Box>
-                            <Box sx={{m:3 , mr: 2, ml: 10, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <Box sx={{m:3 , mr: 2, ml: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                 <Typography variant='h5' fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.protein : <Skeleton />}g</Typography>
-                                <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>Protein</Typography>
+                                <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>protein</Typography>
+                            </Box>
+                            <Box sx={{m:3 , mr: 2, ml: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                <Typography variant='h5' fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.totalSugars : <Skeleton />}g</Typography>
+                                <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>total sugar</Typography>
                             </Box>
                         </Box>
                     </Box>
@@ -136,6 +195,14 @@ const HomePage = () => {
             </Box>
         </Box>    
         </Box>
+        <Dialog open={open} onClose={handleClose} >
+            <DialogTitle variant='h4' fontWeight="bold" noWrap>Description</DialogTitle>
+            <DialogContent>
+                <DialogContentText style={{fontSize: '1.125rem'}}>
+                    {recipe && recipe.description}
+                </DialogContentText>
+            </DialogContent>
+        </Dialog>
     </Box>
   )
 }
