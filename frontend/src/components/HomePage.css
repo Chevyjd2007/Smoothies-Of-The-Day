@@ -1,0 +1,84 @@
+.paper {
+    margin-bottom: 30px;
+    margin-top: 5px;
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+.image-container {
+    height: 100%;
+    width: 150%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .box-container {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+
+.ingredientList {
+    font-size: '1.125rem';
+}
+
+
+.paper > :not(style) {
+    width: 600px;
+    height: 350px;
+  }
+
+/* For medium screens */
+@media screen and (max-width: 2000px) {
+    .paper > :not(style) {
+      width: 500px;
+      height: 292px;
+    }
+
+    .image-container {
+        width: 130%;
+      }
+
+      .box-container {
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+  }
+  
+  /* For small screens */
+  @media screen and (max-width: 1700px) {
+    .paper > :not(style) {
+      width: 400px;
+      height: 233px; 
+    }
+    .ingredientList {
+        font-size: '1rem';
+    }
+    .image-container {
+        width: 110%; 
+  }
+  .box-container {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+  
+  /* For extra small screens */
+  @media screen and (max-width: 1450px) {
+    .paper > :not(style) {
+      width: 300px; 
+      height: 175px; 
+    }
+    .ingredientList {
+        font-size: '.75rem';
+    }
+
+    .image-container {
+        width: 90%;
+      }
+      .box-container {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+  }
+  

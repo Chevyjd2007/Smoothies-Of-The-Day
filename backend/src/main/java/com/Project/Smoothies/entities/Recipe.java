@@ -27,6 +27,7 @@ public class Recipe {
     @ElementCollection
     private List<String> ingredients;
 
+    @Column(length = 1000)
     private String steps;
 
     @OneToOne(cascade = CascadeType.ALL)

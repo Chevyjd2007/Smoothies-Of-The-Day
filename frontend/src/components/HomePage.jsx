@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react'
-import {Box, Typography, Paper, Skeleton, List, ListItem, Tooltip, IconButton} from '@mui/material';
+import {Box, Typography, Paper, Skeleton, List, ListItem, Tooltip, IconButton, Button} from '@mui/material';
 import axios from 'axios';
 import { PiDotOutlineFill } from "react-icons/pi";
 import { IoIosInformationCircle } from "react-icons/io";
@@ -8,6 +8,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
+import "./HomePage.css"
 
 
 const HomePage = () => {
@@ -104,7 +105,7 @@ const HomePage = () => {
             </Box>
         <Box display="flex" flexDirection="row" justifyContent="space-between">
             <Box>
-                <Box mb="30px" pr={20}  mt={"5px"} sx={{display: 'flex', flexWrap: 'wrap', '& > :not(style)': {width: 600, height: 370},}}>
+                <Box className="paper">
                 <Paper elevation={6} sx={{ p: 2 , bgcolor: "#bdf59f", color: '#707070'}}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                         <Box sx={{m:3 , mr: 2, ml: 2}}>
@@ -122,23 +123,23 @@ const HomePage = () => {
                     </Box>
                     <Typography sx={{ml:3 , mr: 2, ml: 2}} variant='h5' fontWeight="bold" noWrap>Yield:</Typography>
                     <Typography sx={{ml:3 , mr: 2, ml: 2, fontSize: '1.125rem', lineHeight: '1.75rem'}}  noWrap>{recipe ? recipe.servings : <Skeleton />} servings, 1 cup each</Typography>
+                    <Button sx={{pt: '15px'}} size='large'>Nutrition Profile</Button>
                     <hr style={{width: '100%', border: 'none', borderTop: '1px solid #707070', marginTop: 15, marginBottom: 15}}/>
-                    <Typography sx={{ml:3 , mr: 2, ml: 2}} variant='h5' fontWeight="bold" noWrap>Nutrition Profile:</Typography>
                     <List>
-                        {recipe && recipe.nutritionProfile.slice(0, 3).map((profile, index) => 
+                        {/*recipe && recipe.nutritionProfile.slice(0, 3).map((profile, index) => 
                             <ListItem key={index} style={{fontSize: '1.125rem'}}>
                                 {profile}
                             </ListItem>
-                        )}
+  )*/}
                     </List>
                 </Paper>
                 </Box>
-                <Box mb="30px" pr={20}  mt={"5px"} sx={{display: 'flex', flexWrap: 'wrap', '& > :not(style)': {width: 600, height: 350},}}>
+                <Box  className="paper">
                 <Paper elevation={6} sx={{ p: 2, bgcolor: '#9ceef7', color: '#707070'}}>
                     <Typography sx={{m: 2, mt: 3, mb: 1}} variant='h4' fontWeight="bold" noWrap>Ingredients</Typography>
                         <List>
                             {recipe && recipe.ingredients.map((ingredient, index) => (
-                            <ListItem key={index} style={{fontSize: '1.125rem'}}>
+                            <ListItem key={index} className='ingredientList'>
                                 {ingredient}
                             </ListItem>
                             ))}
@@ -146,11 +147,11 @@ const HomePage = () => {
                 </Paper>
                 </Box>
             </Box>
-            <Box>
-                {pic && <img style={{height: "100%", width: "150%", position: 'relative', left: '50%', transform: 'translate(-50%, 0)'}} src={pic} alt='smoothies' />}
+            <Box className="box-container">
+                {pic && <img className="image-container" src={pic} alt='smoothies' />}
             </Box>
             <Box>
-                <Box mb="30px" pl={20}  mt={"5px"} sx={{display: 'flex', flexWrap: 'wrap', '& > :not(style)': {width: 600, height: 350},}}>
+                <Box className="paper">
                 <Paper elevation={6} sx={{ p: 2, bgcolor: '#f7d09c', color: '#707070'}}>
                     <Typography sx={{m: 2, mt: 3, mb: 3}} variant='h4' fontWeight="bold" noWrap>Directions</Typography>
                     <Typography sx={{m: 2, mt: 3, mb: 3}} variant='h5' fontWeight="bold" noWrap>Step 1</Typography>
@@ -159,7 +160,7 @@ const HomePage = () => {
                     </Typography>
                 </Paper>
                 </Box>
-                <Box mb="30px"  pl={20}  mt={"5px"} sx={{display: 'flex', flexWrap: 'wrap', '& > :not(style)': {width: 600, height: 350},}}>
+                <Box className='paper'>
                 <Paper elevation={6} sx={{ p: 2, bgcolor: '#f79c9f', color: '#707070'}}>
                     <Box sx={{m:3 , mr: 2, ml: 2, display: 'flex'}}>
                         <Typography   variant='h4' fontWeight="bold" noWrap>Nutrition Facts</Typography>
