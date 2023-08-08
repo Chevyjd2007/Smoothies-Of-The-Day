@@ -1,1 +1,1 @@
-Full stack CRUD Application using Java spring and MariaDB alongside ReactJS. The purpose of this web application is to display a new smoothies recipe everyday and allow users to submit their own smoothies recipes. 
+This was inspired by my time at Amadeus where my intern project, conveniently, also revolved around Smoothies (Compliance). The purpose of this application is to display a new smoothie recipe every day as well allowing end-users to add and rate recipes. This application is deployed in AWS Elastic BeanStalk and RDS.
