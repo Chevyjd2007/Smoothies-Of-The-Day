@@ -1,0 +1,44 @@
+.container {
+    max-height: 400px;
+    max-width: 1000px;
+    overflow-y:scroll;
+    
+   
+  }
+  table {
+    width: 80px;
+    height: 80px;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  th,
+  td {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #2a2d64;
+   
+  }
+  th {
+    text-align: left;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+  }
+  thead th {
+    background-color: #97c3f0;
+  }
+  tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  tbody td {
+    position: relative;
+  }
+  tbody td:hover:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -9999px;
+    bottom: -9999px;
+    background-color: rgba(187, 186, 186, 0.845);
+    z-index: -1;
+  }

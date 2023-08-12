@@ -33,11 +33,15 @@ public class RecipeSchedulerService {
         int totalRecipes = (int) total;
 
         // randomizes a new index
-        randomIndex = new Random().nextInt(totalRecipes);
+        Random random = new Random();
+        int min = 1;
+        int randomIndex = random.nextInt(totalRecipes - min) + min;
 
-        // Look up the current RecipeDayIndex, or create a new one if it doesn't exist
-        RecipeDayIndex recipeDayIndex = recipeDayIndexRepo.findById(1L)
-                .orElse(new RecipeDayIndex(1L));
+        long totalId = recipeDayIndexRepo.count();
+        long id = totalId++;
+
+        // Add a new random index into the database
+        RecipeDayIndex recipeDayIndex = new RecipeDayIndex(id, randomIndex);
 
         // Saves the recipeDayIndex to the database
         recipeDayIndexRepo.save(recipeDayIndex);

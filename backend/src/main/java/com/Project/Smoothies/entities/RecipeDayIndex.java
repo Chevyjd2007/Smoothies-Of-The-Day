@@ -11,15 +11,16 @@ import jakarta.persistence.Table;
 public class RecipeDayIndex {
 
     @Id
-    private Long id = 1L;
+    private Long id;
 
     @Column(name = "recipe_index")
-    private Long recipeIndex;
+    private int recipeIndex;
 
     public RecipeDayIndex() {
     }
 
-    public RecipeDayIndex(Long recipeIndex) {
+    public RecipeDayIndex(Long id, int recipeIndex) {
+        this.id = id;
         this.recipeIndex = recipeIndex;
     }
 
@@ -31,11 +32,11 @@ public class RecipeDayIndex {
         this.id = id;
     }
 
-    public Long getRecipeIndex() {
+    public int getRecipeIndex() {
         return recipeIndex;
     }
 
-    public void setRecipeIndex(Long recipeIndex) {
+    public void setRecipeIndex(int recipeIndex) {
         this.recipeIndex = recipeIndex;
     }
 }

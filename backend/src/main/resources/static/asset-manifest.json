@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.2bd76d2c.css",
-    "main.js": "/static/js/main.75ebc865.js",
+    "main.css": "/static/css/main.8c38c649.css",
+    "main.js": "/static/js/main.75dc688c.js",
+    "static/media/Smoothies_1.mp4": "/static/media/Smoothies_1.416a5a407e328d7e957b.mp4",
     "index.html": "/index.html",
-    "main.2bd76d2c.css.map": "/static/css/main.2bd76d2c.css.map",
-    "main.75ebc865.js.map": "/static/js/main.75ebc865.js.map"
+    "main.8c38c649.css.map": "/static/css/main.8c38c649.css.map",
+    "main.75dc688c.js.map": "/static/js/main.75dc688c.js.map"
   },
   "entrypoints": [
-    "static/css/main.2bd76d2c.css",
-    "static/js/main.75ebc865.js"
+    "static/css/main.8c38c649.css",
+    "static/js/main.75dc688c.js"
   ]
 }

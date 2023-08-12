@@ -1,17 +1,22 @@
 import React, { useEffect, useState} from 'react'
-import {Box, Typography, Paper, Skeleton, List, ListItem, Tooltip, IconButton, Button} from '@mui/material';
+import {Box, Typography, Paper, Skeleton, List, ListItem, Tooltip, IconButton, Button, useMediaQuery} from '@mui/material';
 import axios from 'axios';
 import { PiDotOutlineFill } from "react-icons/pi";
 import { IoIosInformationCircle } from "react-icons/io";
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
-import "./HomePage.css"
+import "./HomePage.css";
+import NutritionButton from './NutritionButton';
+
 
 
 const HomePage = () => {
+    // Responsive media queries
+    const large = useMediaQuery('(max-width: 2000px)');
+    const medium = useMediaQuery('(max-width: 1700px)');
+
     // Initial states 
     const [pic, setPic] = useState(null);
     const [recipe, setRecipe] = useState(null);
@@ -90,6 +95,7 @@ const HomePage = () => {
       
 
 
+
   return (
     <Box  mt="20px" >
         <Box display="flex" justifyContent={'center'} alignItems={'center'} flexDirection={'column'} height={"100vh"}>
@@ -109,22 +115,22 @@ const HomePage = () => {
                 <Paper elevation={6} sx={{ p: 2 , bgcolor: "#bdf59f", color: '#707070'}}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                         <Box sx={{m:3 , mr: 2, ml: 2}}>
-                            <Typography variant='h5' fontWeight="bold" noWrap >Cook Time:</Typography>
+                            <Typography variant={medium ? 'h6' : 'h5'} fontWeight="bold" noWrap >Cook Time:</Typography>
                             <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>{recipe ? recipe.cookTime : <Skeleton />} mins</Typography>
                         </Box>
                         <Box sx={{m:3 , mr: 2, ml: 2}}>
-                            <Typography variant='h5' fontWeight="bold" noWrap>Total Time:</Typography>
+                            <Typography variant={medium ? 'h6' : 'h5'} fontWeight="bold" noWrap>Total Time:</Typography>
                             <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>{recipe ? recipe.cookTime : <Skeleton />} mins</Typography>
                         </Box>
                         <Box sx={{m:3 , mr: 5, ml: 2}}>
-                            <Typography variant='h5' fontWeight="bold" noWrap>Servings:</Typography>
+                            <Typography variant={medium ? 'h6' : 'h5'} fontWeight="bold" noWrap>Servings:</Typography>
                             <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>{recipe ? recipe.servings : <Skeleton />}</Typography>
                         </Box>
                     </Box>
-                    <Typography sx={{ml:3 , mr: 2, ml: 2}} variant='h5' fontWeight="bold" noWrap>Yield:</Typography>
+                    <Typography sx={{ml:3 , mr: 2, ml: 2}} variant={medium ? 'h6' : 'h5'} fontWeight="bold" noWrap>Yield:</Typography>
                     <Typography sx={{ml:3 , mr: 2, ml: 2, fontSize: '1.125rem', lineHeight: '1.75rem'}}  noWrap>{recipe ? recipe.servings : <Skeleton />} servings, 1 cup each</Typography>
-                    <Button sx={{pt: '15px'}} size='large'>Nutrition Profile</Button>
-                    <hr style={{width: '100%', border: 'none', borderTop: '1px solid #707070', marginTop: 15, marginBottom: 15}}/>
+                    <NutritionButton/>
+                   
                     <List>
                         {/*recipe && recipe.nutritionProfile.slice(0, 3).map((profile, index) => 
                             <ListItem key={index} style={{fontSize: '1.125rem'}}>
@@ -136,7 +142,7 @@ const HomePage = () => {
                 </Box>
                 <Box  className="paper">
                 <Paper elevation={6} sx={{ p: 2, bgcolor: '#9ceef7', color: '#707070'}}>
-                    <Typography sx={{m: 2, mt: 3, mb: 1}} variant='h4' fontWeight="bold" noWrap>Ingredients</Typography>
+                <h3 className='paper-title'>Ingredients</h3>
                         <List>
                             {recipe && recipe.ingredients.map((ingredient, index) => (
                             <ListItem key={index} className='ingredientList'>
@@ -153,8 +159,8 @@ const HomePage = () => {
             <Box>
                 <Box className="paper">
                 <Paper elevation={6} sx={{ p: 2, bgcolor: '#f7d09c', color: '#707070'}}>
-                    <Typography sx={{m: 2, mt: 3, mb: 3}} variant='h4' fontWeight="bold" noWrap>Directions</Typography>
-                    <Typography sx={{m: 2, mt: 3, mb: 3}} variant='h5' fontWeight="bold" noWrap>Step 1</Typography>
+                    <h3 className='paper-title'>Directions</h3>
+                    <Typography sx={{m: 2, mt: 3, mb: 3}} variant={medium ? 'h6' : 'h5'} fontWeight="bold" noWrap>Step 1</Typography>
                     <Typography sx={{m: 2, mt: 3, mb: 3}} variant='body1'>
                     {recipe ? recipe.steps : <Skeleton />}
                     </Typography>
@@ -162,30 +168,30 @@ const HomePage = () => {
                 </Box>
                 <Box className='paper'>
                 <Paper elevation={6} sx={{ p: 2, bgcolor: '#f79c9f', color: '#707070'}}>
-                    <Box sx={{m:3 , mr: 2, ml: 2, display: 'flex'}}>
-                        <Typography   variant='h4' fontWeight="bold" noWrap>Nutrition Facts</Typography>
-                        <Typography variant='h6' sx={{pt: .5, pl: 1}}  noWrap>(per serving)</Typography>
+                    <Box display={'flex'}>
+                        <h3 className='paper-title'>Nutrition Facts</h3>
+                        <Typography variant='h6' sx={{pt: 3.5, pl: .5}}  noWrap>(per serving)</Typography>
                     </Box>
                     <Box display={'flex'} justifyContent={'space-between'}>
                         <Box sx={{m:3 , mr: 2, ml: 2, display: 'flex'}}>
-                            <Box sx={{m:3 , mr: 2, ml: 2, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                                <Typography variant='h5' fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.calories : <Skeleton />}</Typography>
+                            <Box className='facts-box-first'>
+                                <Typography variant={large ? 'h6' : 'h5'} fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.calories : <Skeleton />}</Typography>
                                 <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>calories</Typography>
                             </Box>
-                            <Box sx={{m:3 , mr: 2, ml: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                                <Typography variant='h5' fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.fat : <Skeleton />}g</Typography>
+                            <Box className='facts-box'>
+                                <Typography variant={large ? 'h6' : 'h5'} fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.fat : <Skeleton />}g</Typography>
                                 <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>fat</Typography>
                             </Box>
-                            <Box sx={{m:3 , mr: 2, ml: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                                <Typography variant='h5' fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.carbs : <Skeleton />}g</Typography>
+                            <Box className='facts-box'>
+                                <Typography variant={large ? 'h6' : 'h5'} fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.carbs : <Skeleton />}g</Typography>
                                 <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>carbs</Typography>
                             </Box>
-                            <Box sx={{m:3 , mr: 2, ml: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                                <Typography variant='h5' fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.protein : <Skeleton />}g</Typography>
+                            <Box className='facts-box'>
+                                <Typography variant={large ? 'h6' : 'h5'} fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.protein : <Skeleton />}g</Typography>
                                 <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>protein</Typography>
                             </Box>
-                            <Box sx={{m:3 , mr: 2, ml: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                                <Typography variant='h5' fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.totalSugars : <Skeleton />}g</Typography>
+                            <Box className='facts-box'>
+                                <Typography variant={large ? 'h6' : 'h5'} fontWeight="bold" noWrap >{recipe ? recipe.nutritionFact.totalSugars : <Skeleton />}g</Typography>
                                 <Typography sx={{fontSize: '1.125rem', lineHeight: '1.75rem'}} noWrap>total sugar</Typography>
                             </Box>
                         </Box>

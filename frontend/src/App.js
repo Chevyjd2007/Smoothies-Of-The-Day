@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Nav from './components/Nav';
 import HomePage from "./components/HomePage"
+import Hero from './components/Hero';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -20,6 +21,7 @@ function App() {
       }}
     >
       <Nav/>
+      <Hero/>
       <HomePage/>
     </Box>
   );
