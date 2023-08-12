@@ -97,7 +97,7 @@ const HomePage = () => {
 
 
   return (
-    <Box>
+    <Box className="home-container">
         <Box display="flex" justifyContent={'center'} alignItems={'center'} flexDirection={'column'} height={"100vh"}>
             <Box className="title-container">
                 <Tooltip title="Description">
@@ -129,7 +129,7 @@ const HomePage = () => {
                     </Box>
                     <Typography sx={{ml:3 , mr: 2, ml: 2}} variant={medium ? 'h6' : 'h5'} fontWeight="bold" noWrap>Yield:</Typography>
                     <Typography sx={{ml:3 , mr: 2, ml: 2, fontSize: '1.125rem', lineHeight: '1.75rem'}}  noWrap>{recipe ? recipe.servings : <Skeleton />} servings, 1 cup each</Typography>
-                    <NutritionButton/>
+                    <NutritionButton />
                    
                     <List>
                         {/*recipe && recipe.nutritionProfile.slice(0, 3).map((profile, index) => 

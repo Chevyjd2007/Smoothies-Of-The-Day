@@ -50,19 +50,23 @@ export default function AddRecipe() {
   totalSugars: ""
 })
 
+const [errors, setErrors] = React.useState({});
+
 
   // Handle submission of the new recipe form
   const handleSubmit = () => {
+    // From needs to be validated first before submitting
+    if (validateForm()) {
     // Creating a new recipe object to be sent after submission
-    const recipe = {title, description, cookTime, servings, nutritionProfile, ingredients, steps, nutritionFact};
-    console.log("Submitting: ", recipe);
-    axios.post('/api/recipes', recipe)
-    .then(response => {console.log(response)
+      const recipe = {title, description, cookTime, servings, nutritionProfile, ingredients, steps, nutritionFact};
+      console.log("Submitting: ", recipe);
+      axios.post('/api/recipes', recipe)
+      .then(response => {console.log(response)
         })
         .catch(error => console.error(error));
     
-
-    setOpen(false);
+      setOpen(false);
+      }
   };
 
   // Opens dialog
@@ -111,6 +115,28 @@ export default function AddRecipe() {
     setIngredients(values);
   };
 
+  // Confirms form elements are not left blank before submitting
+  const validateForm = () => {
+    const tempErrors = {};
+    if (!title) tempErrors.title = 'required';
+    if (!description) tempErrors.description = "required";
+    if (!nutritionFact.calories) tempErrors.calories = "required";
+    if (!cookTime) tempErrors.cookTime = "required";
+    if (!servings) tempErrors.servings = "required";
+    if (!steps) tempErrors.steps = "required";
+    if (!nutritionFact.fat) tempErrors.fat = "required";
+    if (!nutritionFact.carbs) tempErrors.carbs = "required";
+    if (!nutritionFact.protein) tempErrors.protein = "required";
+    if (!nutritionFact.totalSugars) tempErrors.totalSugars = "required";
+    if (!ingredients) tempErrors.ingredients = 'required';
+
+
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
+
+  
+
   return (
     <div>
       <Tooltip title="Add recipe">
@@ -126,6 +152,7 @@ export default function AddRecipe() {
             autoFocus
             margin="dense"
             id="title"
+            name='title'
             label="title"
             type="text"
             sx={{ m: 1, width: 250 }}
@@ -133,11 +160,14 @@ export default function AddRecipe() {
             color='success'
             value={title}
             onChange={e => setTitle(e.target.value)}
+            error={!!errors.title}
+            helperText={errors.title}
           />
            <TextField
             autoFocus
             margin="dense"
             id="calories"
+            name='calories'
             label="calories"
             sx={{ m: 1, width: 100 }}
             type="text"
@@ -145,11 +175,14 @@ export default function AddRecipe() {
             variant="standard"
             value={nutritionFact.calories}
             onChange={e => setNutritionFact({ ...nutritionFact, calories: e.target.value })}
+            error={!!errors.calories}
+            helperText={errors.calories}
           />
           <TextField
             autoFocus
             margin="dense"
             id="description"
+            name='description'
             label="description"
             sx={{ m: 1, width: 400 }}
             type="text"
@@ -159,11 +192,14 @@ export default function AddRecipe() {
             variant="standard"
             value={description}
             onChange={e => setDescription(e.target.value)}
+            error={!!errors.description}
+            helperText={errors.description}
           />
           <TextField
             autoFocus
             margin="dense"
             id="cook-time"
+            name='cookTime'
             label="cook time"
             sx={{ m: 1, width: 190 }}
             type="text"
@@ -174,11 +210,14 @@ export default function AddRecipe() {
             variant="standard"
             value={cookTime}
             onChange={e => setCookTime(e.target.value)}
+            error={!!errors.cookTime}
+            helperText={errors.cookTime}
           />
           <TextField
             autoFocus
             margin="dense"
             id="servings"
+            name='servings'
             label="servings"
             sx={{ m: 1, width: 195 }}
             type="text"
@@ -186,12 +225,15 @@ export default function AddRecipe() {
             variant="standard"
             value={servings}
             onChange={e => setServings(e.target.value)}
+            error={!!errors.servings}
+            helperText={errors.servings}
           />
           <DialogContentText sx={{ml: 1, mt: 1}}>nutrition profile</DialogContentText>
           <Select
           labelId="nutrition-profile-label"
           sx={{ m: 1, width: 400 }}
           id="nutrion-profile"
+          name='nutritionProfile'
           color='success'
           multiple
           value={nutritionProfile}
@@ -212,9 +254,13 @@ export default function AddRecipe() {
           <TextField
             label={`item ${index + 1}`}
             variant="outlined"
+            name='ingredients'
             sx={{m: 1, width: 250}}
             value={ingredient}
             onChange={event => handleIngredientChange(index, event)}
+            error={!!errors.ingredients}
+            helperText={errors.ingredients}
+            
           />
           <Button sx={{m: 1, mt: 2}} startIcon={<DeleteIcon />} size='large' color="error" variant="outlined" onClick={() => handleRemoveIngredient(index)}>Remove</Button>
         </div>
@@ -225,6 +271,7 @@ export default function AddRecipe() {
             margin="dense"
             id="steps"
             label="steps"
+            name='steps'
             sx={{ m: 1, width: 400 }}
             type="text"
             multiline
@@ -233,6 +280,8 @@ export default function AddRecipe() {
             variant="standard"
             value={steps}
             onChange={e => setSteps(e.target.value)}
+            error={!!errors.steps}
+            helperText={errors.steps}
           />
           
           <TextField
@@ -241,6 +290,7 @@ export default function AddRecipe() {
             id="fat"
             label="fat"
             sx={{ m: 1, width: 90 }}
+            name='fat'
             InputProps={{
               endAdornment: <InputAdornment position="end">g</InputAdornment>,
             }}
@@ -249,11 +299,14 @@ export default function AddRecipe() {
             variant="standard"
             value={nutritionFact.fat}
             onChange={e => setNutritionFact({ ...nutritionFact, fat: e.target.value })}
+            error={!!errors.fat}
+            helperText={errors.fat}
           />
           <TextField
             autoFocus
             margin="dense"
             id="carbs"
+            name='carbs'
             label="carbs"
             sx={{ m: 1, width: 80 }}
             InputProps={{
@@ -264,11 +317,14 @@ export default function AddRecipe() {
             variant="standard"
             value={nutritionFact.carbs}
             onChange={e => setNutritionFact({ ...nutritionFact, carbs: e.target.value })}
+            error={!!errors.carbs}
+            helperText={errors.carbs}
           />
           <TextField
             autoFocus
             margin="dense"
             id="protein"
+            name='protein'
             label="protein"
             sx={{ m: 1, width: 80 }}
             InputProps={{
@@ -279,11 +335,14 @@ export default function AddRecipe() {
             variant="standard"
             value={nutritionFact.protein}
             onChange={e => setNutritionFact({ ...nutritionFact, protein: e.target.value })}
+            error={!!errors.protein}
+            helperText={errors.protein}
           />
           <TextField
             autoFocus
             margin="dense"
             id="sugars"
+            name='totalSugars'
             label="sugars"
             sx={{ m: 1, width: 80 }}
             InputProps={{
@@ -294,6 +353,8 @@ export default function AddRecipe() {
             variant="standard"
             value={nutritionFact.totalSugars}
             onChange={e => setNutritionFact({ ...nutritionFact, totalSugars: e.target.value })}
+            error={!!errors.totalSugars}
+            helperText={errors.totalSugars}
           />
           </form>
         </DialogContent>

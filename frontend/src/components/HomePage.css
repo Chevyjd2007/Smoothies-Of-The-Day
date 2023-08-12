@@ -119,6 +119,10 @@
     color: #929fe8;
   }
 
+  .home-container {
+    padding-bottom: 0;
+  }
+
 /* For large screens */
 @media screen and (max-width: 2000px) {
     .paper > :not(style) {
@@ -229,6 +233,10 @@
   .image-container {
     width: 0;
     height: 0;
+  }
+
+  .home-container {
+      padding-bottom: 450px;
   }
   
 }
