@@ -120,7 +120,7 @@
   }
 
   .home-container {
-    padding-bottom: 0;
+    padding-bottom: 200px;
   }
 
 /* For large screens */
@@ -227,7 +227,7 @@
   }
 
   .title-container {
-    margin-top: 400px;
+    margin-top: 1000px;
   }
 
   .image-container {
@@ -236,7 +236,7 @@
   }
 
   .home-container {
-      padding-bottom: 450px;
+      padding-bottom: 700px;
   }
   
 }
@@ -260,6 +260,10 @@
   height: 40px;
   width: 40px;
  }
+
+ .home-container {
+  padding-bottom: 700px;
+}
 }
 
 /* Medium phones */
@@ -289,6 +293,10 @@
   .facts-box-first {
     margin-left: -16px;
   }
+
+  .home-container {
+    padding-bottom: 700px;
+}
  
 }
 
@@ -320,5 +328,8 @@
     margin-left: -16px;
   }
   
+  .home-container {
+    padding-bottom: 700px;
+}
 }
   
