@@ -15,6 +15,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import DeleteIcon from '@mui/icons-material/Delete';
+import "./nav.css"
 
 // Dropdown menu for nutrion profiles from MUI
 const ITEM_HEIGHT = 48;
@@ -114,7 +115,7 @@ export default function AddRecipe() {
     <div>
       <Tooltip title="Add recipe">
           <IconButton onClick={handleOpen}>
-            <MdAddBox size={"45px"} color='#64ce56'/>
+            <MdAddBox className='add-btn'/>
           </IconButton>
         </Tooltip>
       <Dialog open={open} onClose={handleClose} >

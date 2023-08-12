@@ -97,19 +97,19 @@ const HomePage = () => {
 
 
   return (
-    <Box  mt="20px" >
+    <Box>
         <Box display="flex" justifyContent={'center'} alignItems={'center'} flexDirection={'column'} height={"100vh"}>
-            <Box mb="30px"  mt={"5px"} flexDirection={"row"} alignContent={"center"} alignItems={"center"} display={'flex'}>
+            <Box className="title-container">
                 <Tooltip title="Description">
                     <IconButton onClick={handleOpen}>
-                        <IoIosInformationCircle color='#8f8c8c' size='50' />
+                        <IoIosInformationCircle className='information-circle' />
                     </IconButton>
                 </Tooltip>
-                <Typography noWrap variant="h2" fontWeight="bold" sx={{ m: "0 0 5px 15px", textAlign: 'center', color: '#e892c6'}} >{recipe ? recipe.title : <Skeleton />}</Typography>
-                <PiDotOutlineFill size={50} color='#929fe8'/>
-                <Typography sx={{ m: "0 0 5px 0", color: '#a8a8a8'}} variant='h4' fontWeight="bold" noWrap>{total} total recipes</Typography>
+                <h1 className='title-recipe' >{recipe ? recipe.title : <Skeleton />}</h1>
+                <PiDotOutlineFill className='dot'/>
+                <h4 className='total-recipe'>{total} total recipes</h4>
             </Box>
-        <Box display="flex" flexDirection="row" justifyContent="space-between">
+        <Box className="papers-container">
             <Box>
                 <Box className="paper">
                 <Paper elevation={6} sx={{ p: 2 , bgcolor: "#bdf59f", color: '#707070'}}>

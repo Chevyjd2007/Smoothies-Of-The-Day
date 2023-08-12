@@ -57,6 +57,33 @@
      }
      
  }
+
+ @media screen and (max-width: 1080px) {
+    .title {
+        font-size: 30px;
+    }
+    
+}
  
+  /* Large phones/phablets */
+  @media only screen and (min-width: 481px) and (max-width: 768px) {
+    .title {
+        font-size: 20px;
+    }
+  }
+
+  /* Medium phones */
+  @media only screen and (min-width: 321px) and (max-width: 480px) {
+    .title {
+        font-size: 10px;
+    }
+  }
+
+/* Small phones (portrait) */
+@media only screen and (max-width: 320px) {
+    .title {
+        font-size: 5px;
+    }
+  }
  
  

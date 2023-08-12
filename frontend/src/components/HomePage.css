@@ -1,5 +1,10 @@
-.container {
-  
+.title-container {
+  margin-bottom: 30px;
+  margin-top: 50px;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .paper {
@@ -67,6 +72,53 @@
     margin-bottom: 8px;
   }
 
+  .papers-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .information-circle {
+    color: #8f8c8c;
+    width: 50px;
+    height: 50px;
+  }
+
+  .title-recipe {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 700;
+    font-size: 3.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.00833em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #e892c6;
+    margin: 0 0 5px 15px;
+    text-align: center;
+  }
+
+  .total-recipe {
+    margin: 0;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 400;
+    font-size: 2.125rem;
+    line-height: 1.235;
+    letter-spacing: 0.00735em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+    color: #a8a8a8;
+    margin: 0 0 5px 0;
+  }
+
+  .dot {
+    width: 50px;
+    height: 50px;
+    color: #929fe8;
+  }
+
 /* For large screens */
 @media screen and (max-width: 2000px) {
     .paper > :not(style) {
@@ -127,6 +179,10 @@
     margin-right: 16px;
     margin-left: 16px;
   }
+
+  .title-container {
+    margin-top: 100px;
+  }
 }
   
   /* For smaller screens */
@@ -159,4 +215,102 @@
       height: 0;
     }
   }
+
+  
+ @media screen and (max-width: 1080px) {
+  .papers-container {
+    flex-direction: column;
+  }
+
+  .title-container {
+    margin-top: 400px;
+  }
+
+  .image-container {
+    width: 0;
+    height: 0;
+  }
+  
+}
+
+/* Large phones/phablets */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+ .title-recipe {
+  font-size: 2.0rem;
+ }
+
+ .total-recipe {
+  font-size: 1.5rem;
+ }
+
+ .information-circle {
+  height: 40px;
+  width: 40px;
+ }
+
+ .dot {
+  height: 40px;
+  width: 40px;
+ }
+}
+
+/* Medium phones */
+@media only screen and (min-width: 321px) and (max-width: 480px) {
+  .title-recipe {
+    font-size: 1.75rem;
+   }
+  
+   .total-recipe {
+    font-size: 1.0rem;
+   }
+  
+   .information-circle {
+    height: 30px;
+    width: 30px;
+   }
+  
+   .dot {
+    height: 30px;
+    width: 30px;
+   }
+
+   .paper > :not(style) {
+    width: 400px; 
+  }
+
+  .facts-box-first {
+    margin-left: -16px;
+  }
+ 
+}
+
+/* Small phones (portrait) */
+@media only screen and (max-width: 320px) {
+  .title-recipe {
+    font-size: 1.75rem;
+   }
+  
+   .total-recipe {
+    font-size: 1.0rem;
+   }
+  
+   .information-circle {
+    height: 30px;
+    width: 30px;
+   }
+  
+   .dot {
+    height: 30px;
+    width: 30px;
+   }
+
+   .paper > :not(style) {
+    width: 400px; 
+  }
+
+  .facts-box-first {
+    margin-left: -16px;
+  }
+  
+}
   
