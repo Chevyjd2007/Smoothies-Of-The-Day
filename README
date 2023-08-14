@@ -1,1 +1,3 @@
 This was inspired by my time at Amadeus where my intern project, conveniently, also revolved around Smoothies (Compliance). The purpose of this application is to display a new smoothie recipe every day as well allowing end-users to add and rate recipes. This application is deployed in AWS Elastic BeanStalk and RDS.
+
+www.smoothie-of-the-day.com
