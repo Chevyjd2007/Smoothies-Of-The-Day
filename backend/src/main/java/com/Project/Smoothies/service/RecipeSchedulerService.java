@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.Random;
 
 /*The purpose of this class is to randomize an index every day to serve a new recipe on the controller class*/
@@ -29,13 +30,21 @@ public class RecipeSchedulerService {
     public void randomizeRecipe() {
         long total = recipe.count();
 
+        // Current recipe index
+        int currentIndex = getRecipeIndex();
+
         // Converting long id to an int type
         int totalRecipes = (int) total;
 
         // randomizes a new index
         Random random = new Random();
         int min = 1;
-        int randomIndex = random.nextInt(totalRecipes - min) + min;
+        int randomIndex = 0;
+
+        // Randomize the index while the new index equals the current index so that the current recipe does not get picked
+        do {
+            randomIndex = random.nextInt(totalRecipes - min) + min;
+        } while (randomIndex == currentIndex);
 
         long totalId = recipeDayIndexRepo.count();
         long id = totalId++;
@@ -45,6 +54,12 @@ public class RecipeSchedulerService {
 
         // Saves the recipeDayIndex to the database
         recipeDayIndexRepo.save(recipeDayIndex);
+    }
+
+    // Get the latest recipe day index
+    public int getRecipeIndex() {
+        RecipeDayIndex recipeDayIndex = recipeDayIndexRepo.findById(1L).orElse(null);
+        return recipeDayIndex != null ? recipeDayIndex.getRecipeIndex() : -1;
     }
 
     // Retrieve last entry of the RecipeDayIndex table
