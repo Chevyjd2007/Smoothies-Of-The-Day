@@ -8,7 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
 import "./HomePage.css";
-import NutritionButton from './NutritionButton';
+import NutritionButton from '../tiny components/NutritionButton';
 
 
 

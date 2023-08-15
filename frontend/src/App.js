@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Nav from './components/Nav';
-import HomePage from "./components/HomePage"
-import Hero from './components/Hero';
+import Nav from './components/nav/Nav';
+import HomePage from "./components/home/HomePage"
+import Hero from './components/hero/Hero';
 
 import { useTheme } from '@mui/material/styles';
 

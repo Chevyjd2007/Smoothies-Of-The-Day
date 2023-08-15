@@ -1,9 +1,9 @@
 import React from 'react';
 import "./nav.css"
 import { Box} from "@mui/material";
-import ModeToggleButton from './themes/ModeToggleButton';
+import ModeToggleButton from '../themes/ModeToggleButton';
 import { useTheme } from '@mui/material/styles';
-import AddRecipe from './AddRecipe';
+import AddRecipe from "../tiny components/AddRecipe"
 
 
 export default function Nav() {

@@ -1,6 +1,6 @@
 import React from 'react'
 import "./hero.css"
-import Video from '../assets/Smoothies_1.mp4';
+import Video from '../../assets/Smoothies_1.mp4';
 
 
 

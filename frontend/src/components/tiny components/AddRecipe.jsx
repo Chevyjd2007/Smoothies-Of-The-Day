@@ -15,7 +15,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import DeleteIcon from '@mui/icons-material/Delete';
-import "./nav.css"
+import "../nav/nav.css"
 
 // Dropdown menu for nutrion profiles from MUI
 const ITEM_HEIGHT = 48;

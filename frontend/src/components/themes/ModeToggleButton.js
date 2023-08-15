@@ -6,7 +6,7 @@ import { MdLightMode } from "react-icons/md";
 import { MdBrightness3 } from "react-icons/md";
 import { ColorModeContext } from './ColorModeContextProvider';
 import { Tooltip } from '@mui/material';
-import "../nav.css"
+import "../nav/nav.css"
 
 export default function ModeToggleButton() {
   const theme = useTheme();
